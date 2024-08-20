@@ -14,7 +14,7 @@
 
 //   // all columns in Drafts table
 //   String draftId = 'draftId';
-//   String userId = 'userId';
+//   String userwwId = 'userId';
 //   String eventId = 'eventId';
 //   String reportDate = 'reportDate';
 //   String inspectionType = 'inspectionType';
