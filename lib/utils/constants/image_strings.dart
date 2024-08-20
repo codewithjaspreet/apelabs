@@ -6,20 +6,17 @@ class TImages {
   static const String appLogo = "assets/logos/app_logo.png";
   // -- Social Logos
 
-  static const String onboardingImage1 =
-      "assets/images/app_images/fill_forms_light.webp";
+  static const String onboardingImage1 = "assets/images/onboarding_1.png";
 
   static const String onboardingImage1Dark =
       "assets/images/app_images/fill_forms_dark.webp";
 
-  static const String onboardingImage2 =
-      "assets/images/app_images/inspection_templates_light.webp";
+  static const String onboardingImage2 = "assets/images/onboarding_2.png";
 
   static const String onboardingImage2Dark =
       "assets/images/app_images/inspection_templates_dark.webp";
 
-  static const String onboardingImage3 =
-      "assets/images/app_images/save_drafts_light.webp";
+  static const String onboardingImage3 = "assets/images/onboarding_3.png";
   static const String onboardingImage3Dark =
       "assets/images/app_images/save_drafts_dark.webp";
 

@@ -3,17 +3,17 @@ import 'package:apelabs/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     Future.delayed(const Duration(seconds: 3), () {
-      Get.to(const OnboardingScreen()); // Use Get.offNamed to navigate without the option to return to SplashScreen
+      Get.to(
+          OnboardingScreen()); // Use Get.offNamed to navigate without the option to return to SplashScreen
     });
-    return  Scaffold(
-
+    return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -42,8 +42,6 @@ class SplashScreen extends StatelessWidget {
           ],
         ),
       ),
-
-
     );
   }
 }

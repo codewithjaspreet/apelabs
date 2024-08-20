@@ -9,18 +9,16 @@ class TTexts {
   static const String tContinue = "Continue";
 
   // -- OnBoarding Texts
-  static const String onBoardingTitle1 = "Effortless Inspection Journey";
-  static const String onBoardingTitle2 = "Template Galore";
-  static const String onBoardingTitle3 = "Save Drafts Offline";
-  static const String onBoardingTitle4 = "Shareable Insights";
-  static const String onBoardingTitle5 = "Capture with Digital Proofs";
+  static const String onBoardingTitle1 = "Create Channel & Stream Music";
+  static const String onBoardingTitle2 = "Community";
+  static const String onBoardingTitle3 = "Connect & Customize";
 
   static const String onBoardingSubTitle1 =
-      "Streamline your inspection process for various food products. Fill forms effortlessly, ensuring thorough evaluations without hassle.";
+      "Create your own channel , Enjoy music & Video Streaming with your loved ones.";
   static const String onBoardingSubTitle2 =
-      "Dive into a variety of inspection templates tailored for the food industry. Find the perfect fit for each product, simplifying your evaluation process";
+      "Be a Part of our community  & Participate in different kinds of Discussion";
   static const String onBoardingSubTitle3 =
-      "Seamlessly conduct evaluations offline with draft capability. Stay productive in food inspections, ensuring standards are met consistently, even without internet access";
+      "Connect your earbuds & Enjoy the Volume equalizer.";
 
   static const String onBoardingSubTitle4 =
       "Easily distribute completed inspection reports across platforms. Enhance collaboration and decision-making with seamless sharing, ensuring effective communication and action";
