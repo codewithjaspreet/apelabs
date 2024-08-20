@@ -24,15 +24,16 @@ class OnboardingScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 50.h),
                 child: ClayContainer(
+                  color: const Color(0xffE3E6EC),
                   spread: 10,
-
-                  child: Center(
-                    child: Image.asset('assets/images/onboarding_logo.png'),
-                  ),
                   // color: const Color.fromARGB(255, 14, 15, 16),
                   height: 90.h,
                   width: 90.w,
-                  borderRadius: 150.h / 2, // This makes the container circular
+                  borderRadius: 150.h / 2,
+
+                  child: Center(
+                    child: Image.asset('assets/images/onboarding_logo.png'),
+                  ), // This makes the container circular
                 ),
               ),
             ],

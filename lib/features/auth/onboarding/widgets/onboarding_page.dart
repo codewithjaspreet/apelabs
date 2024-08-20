@@ -1,4 +1,3 @@
-import 'package:apelabs/features/auth/splash/views/splash_screen.dart';
 import 'package:apelabs/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,20 +17,20 @@ class OnBoardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(TSizes.defaultSpace),
+      padding: EdgeInsets.only(top: 50.h),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
             child: ClayContainer(
-              color: const Color(0xffE3E6EC),
-              height: 276.h,
-              width: 276.w,
+              color: const Color(0XFFE3E6EC),
+              height: 250.h,
+              width: 250.w,
               borderRadius: 42.sp,
               child: Center(
                 child: ClayContainer(
-                  color: const Color(0xffE3E6EC),
+                  color: const Color(0XFFE3E6EC),
                   height: 188.h, // Inner container height
                   width: 188.w, // Inner container width
                   borderRadius: 40.sp, // Inner container border radius
@@ -75,6 +74,15 @@ class OnBoardingPage extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
+          ),
+          const SizedBox(
+            height: TSizes.spaceBtwItems,
+          ),
+          ClayContainer(
+            color: const Color(0xffE3E6EC),
+            height: 80.h,
+            width: 80.w,
+            borderRadius: 50,
           ),
         ],
       ),

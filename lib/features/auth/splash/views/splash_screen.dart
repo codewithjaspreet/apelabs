@@ -1,5 +1,4 @@
 import 'package:apelabs/features/auth/onboarding/views/onboarding_screen.dart';
-import 'package:apelabs/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
