@@ -9,12 +9,12 @@ class TTexts {
   static const String tContinue = "Continue";
 
   // -- OnBoarding Texts
-  static const String onBoardingTitle1 = "Create Channel & Stream Music";
+  static const String onBoardingTitle1 = "Create Channel & \nStream Music";
   static const String onBoardingTitle2 = "Community";
   static const String onBoardingTitle3 = "Connect & Customize";
 
   static const String onBoardingSubTitle1 =
-      "Create your own channel , Enjoy music & Video Streaming with your loved ones.";
+      "Create your own channel, Enjoy music & Video Streaming with your loved ones.";
   static const String onBoardingSubTitle2 =
       "Be a Part of our community  & Participate in different kinds of Discussion";
   static const String onBoardingSubTitle3 =

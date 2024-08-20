@@ -3,6 +3,7 @@ import 'package:apelabs/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:clay_containers/clay_containers.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class OnBoardingPage extends StatelessWidget {
   const OnBoardingPage({
@@ -22,23 +23,27 @@ class OnBoardingPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            child: Center(
-              child: ClayContainer(
-                color: const Color(0XffE3E6EC),
-                height: 276.h,
-                width: 276.w,
-                borderRadius: 20,
+          Center(
+            child: ClayContainer(
+              color: const Color(0xffE3E6EC),
+              height: 276.h,
+              width: 276.w,
+              borderRadius: 42.sp,
+              child: Center(
                 child: ClayContainer(
-                  color: const Color(0xFFE0E0E0), // Frame color
-                  height: 188.h,
-                  width: 188.w,
-                  borderRadius: 15,
+                  color: const Color(0xffE3E6EC),
+                  height: 188.h, // Inner container height
+                  width: 188.w, // Inner container width
+                  borderRadius: 40.sp, // Inner container border radius
+                  emboss: true,
+                  depth: 20,
                   child: Center(
                     child: Image.asset(
                       image,
-                      width: 180.w,
-                      height: 180.h,
+                      width: 166.w,
+                      height: 166.h,
+                      fit: BoxFit
+                          .cover, // Ensures the image fits well inside the container
                     ),
                   ),
                 ),
@@ -47,17 +52,29 @@ class OnBoardingPage extends StatelessWidget {
           ),
           const SizedBox(height: TSizes.spaceBtwInputFields),
           Text(
-            title,
-            style: Theme.of(context).textTheme.headlineMedium,
             textAlign: TextAlign.center,
+            title,
+            style: GoogleFonts.lato(
+              textStyle: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 28.sp,
+                color: Colors.black,
+              ),
+            ),
           ),
           const SizedBox(
             height: TSizes.spaceBtwItems,
           ),
           Text(
-            subtitle,
-            style: Theme.of(context).textTheme.bodyMedium,
             textAlign: TextAlign.center,
+            subtitle,
+            style: GoogleFonts.lato(
+              textStyle: TextStyle(
+                fontWeight: FontWeight.w300,
+                fontSize: 15.sp,
+                color: Colors.black,
+              ),
+            ),
           ),
         ],
       ),

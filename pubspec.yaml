@@ -1,18 +1,16 @@
 name: apelabs
 description: "A new Flutter project."
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
   sdk: ^3.4.3
 
-
 dependencies:
   flutter:
     sdk: flutter
-
 
   cupertino_icons: ^1.0.8
 
@@ -20,26 +18,21 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
   flutter_lints: ^4.0.0
   shared_preferences: ^2.3.2
-  clay_containers: ^0.3.4  # for Neuromorphism design
-  go_router:  # for routing
+  clay_containers: ^0.3.4 # for Neuromorphism design
+  go_router: # for routing
   flutter_screenutil: ^5.9.3
   flutter_blue_plus: ^1.32.12
   get: ^4.6.6
-
-
+  google_fonts: ^6.2.1
 
 flutter:
-
-
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - assets/images/
-
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
