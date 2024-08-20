@@ -1,7 +1,7 @@
+import 'package:apelabs/features/auth/singnup/views/full_name_screen.dart';
+import 'package:apelabs/features/auth/singnup/views/otp_verification_screen.dart';
+import 'package:apelabs/features/auth/singnup/views/phonenumber_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/features/auth/signup/views/full_name_screen.dart';
-import 'package:myapp/features/auth/signup/views/otp_verification_screen.dart';
-import 'package:myapp/features/auth/signup/views/phonenumber_screen.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -23,7 +23,7 @@ class _SignupPageState extends State<SignupPage> {
   void _goBack() {
     if (_currentPage > 0) {
       _pageController.previousPage(
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeIn,
       );
     } else {
@@ -36,12 +36,12 @@ class _SignupPageState extends State<SignupPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: _goBack,
         ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(1),
-          child: Container(
+          preferredSize: const Size.fromHeight(1),
+          child: SizedBox(
             height: 2, // Adjust the height of the progress indicator
             child: LinearProgressIndicator(
               value: (_currentPage + 1) / 4, // 4 is the total number of steps
@@ -56,13 +56,13 @@ class _SignupPageState extends State<SignupPage> {
         children: [
           PhoneNumberPage(
               onNext: () => _pageController.nextPage(
-                  duration: Duration(milliseconds: 300), curve: Curves.easeIn)),
+                  duration: const Duration(milliseconds: 300), curve: Curves.easeIn)),
           OtpVerificationPage(
               onNext: () => _pageController.nextPage(
-                  duration: Duration(milliseconds: 300), curve: Curves.easeIn)),
+                  duration: const Duration(milliseconds: 300), curve: Curves.easeIn)),
           FullNamePage(
               onNext: () => _pageController.nextPage(
-                  duration: Duration(milliseconds: 300), curve: Curves.easeIn)),
+                  duration: const Duration(milliseconds: 300), curve: Curves.easeIn)),
         ],
       ),
     );

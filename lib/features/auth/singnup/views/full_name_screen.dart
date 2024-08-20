@@ -4,14 +4,14 @@ import 'package:clay_containers/clay_containers.dart';
 class FullNamePage extends StatelessWidget {
   final VoidCallback onNext;
 
-  FullNamePage({required this.onNext});
+  const FullNamePage({super.key, required this.onNext});
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    Color baseColor = Color(0xFFE3EDF7);
+    Color baseColor = const Color(0xFFE3EDF7);
 
-    return Container(
+    return SizedBox(
       height: screenHeight,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -23,8 +23,8 @@ class FullNamePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Enter your full name', style: TextStyle(fontSize: 24)),
-                  SizedBox(height: 16), // Space between text and input field
+                  const Text('Enter your full name', style: TextStyle(fontSize: 24)),
+                  const SizedBox(height: 16), // Space between text and input field
                   ClayContainer(
                       color: baseColor,
                       spread: 3,
@@ -32,7 +32,7 @@ class FullNamePage extends StatelessWidget {
                       width:
                           double.infinity, // Make the ClayContainer full width
                       borderRadius: 12,
-                      child: Center(
+                      child: const Center(
                           child: Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: 12,
@@ -70,7 +70,7 @@ class FullNamePage extends StatelessWidget {
                   borderRadius: 50,
                   child: Center(
                     child: IconButton(
-                      icon: Icon(Icons.arrow_forward, color: Colors.black45),
+                      icon: const Icon(Icons.arrow_forward, color: Colors.black45),
                       onPressed:
                           onNext, // Call the onNext function when pressed
                     ),

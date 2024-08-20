@@ -5,14 +5,14 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 class PhoneNumberPage extends StatelessWidget {
   final VoidCallback onNext;
 
-  PhoneNumberPage({required this.onNext});
+  const PhoneNumberPage({super.key, required this.onNext});
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    Color baseColor = Color(0xFFE3EDF7);
+    Color baseColor = const Color(0xFFE3EDF7);
 
-    return Container(
+    return SizedBox(
       height: screenHeight,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -24,11 +24,11 @@ class PhoneNumberPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Enter your phone number',
                     style: TextStyle(fontSize: 24),
                   ),
-                  SizedBox(
+                  const SizedBox(
                       height: 16), // Add space between text and input field
                   ClayContainer(
                       color: baseColor,
@@ -42,7 +42,7 @@ class PhoneNumberPage extends StatelessWidget {
                           disableLengthCheck: true,
                           showCountryFlag: false,
                           textAlignVertical: TextAlignVertical.center,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none, // Remove default border
                             hintText: 'Phone Number',
                             hintStyle: TextStyle(color: Colors.black54),
@@ -78,7 +78,7 @@ class PhoneNumberPage extends StatelessWidget {
                   borderRadius: 50,
                   child: Center(
                     child: IconButton(
-                      icon: Icon(Icons.arrow_forward, color: Colors.black54),
+                      icon: const Icon(Icons.arrow_forward, color: Colors.black54),
                       onPressed:
                           onNext, // Call the onNext function when pressed
                     ),
