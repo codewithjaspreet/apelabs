@@ -1,6 +1,7 @@
 import 'package:apelabs/features/home/controllers/homecontroller.dart';
 import 'package:apelabs/utils/constants/sizes.dart';
 import 'package:clay_containers/clay_containers.dart';
+import 'package:equalizer_flutter_custom/equalizer_flutter_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: TSizes.defaultSpace / 2,
             vertical: TSizes.defaultSpace * 2.5,
           ),
@@ -76,6 +77,7 @@ class Home extends StatelessWidget {
                   },
                 ],
               ),
+              VolumeEquiliser()
             ],
           ),
         ),
@@ -161,7 +163,7 @@ class DeviceInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          'Hi $deviceName',
+          deviceName,
           style: GoogleFonts.lato(
             textStyle: TextStyle(
               fontWeight: FontWeight.w500,
@@ -205,8 +207,8 @@ class ConnectNowBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: TSizes.defaultSpace * 3),
-      width: 350.w,
+      margin: const EdgeInsets.symmetric(vertical: TSizes.defaultSpace * 3),
+      width: double.infinity, // Make width flexible to fit parent container
       height: 150.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(14.sp)),
@@ -228,30 +230,38 @@ class ConnectNowBanner extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Connect together to \nListen song & chat',
-              style: GoogleFonts.lato(
-                textStyle: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 18.sp,
-                  color: Colors.white,
+            // Use Flexible to handle text overflow
+            Flexible(
+              child: Text(
+                'Connect together to \nListen song & chat',
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18.sp,
+                    color: Colors.white,
+                  ),
                 ),
+                overflow: TextOverflow.ellipsis, // Handle text overflow
+                maxLines: 2, // Limit the number of lines
               ),
             ),
             SizedBox(height: 10.h),
-            ClayContainer(
-              borderRadius: 9.sp,
-              width: 147.w,
-              height: 35.h,
-              spread: 0,
-              child: Center(
-                child: Text(
-                  'Connect Now',
-                  style: GoogleFonts.lato(
-                    textStyle: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 13.sp,
-                      color: const Color(0XFF4771AB),
+            Align(
+              alignment: Alignment.centerLeft, // Align button to the left
+              child: ClayContainer(
+                borderRadius: 9.sp,
+                width: 147.w,
+                height: 35.h,
+                spread: 0,
+                child: Center(
+                  child: Text(
+                    'Connect Now',
+                    style: GoogleFonts.lato(
+                      textStyle: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 13.sp,
+                        color: const Color(0XFF4771AB),
+                      ),
                     ),
                   ),
                 ),
@@ -263,6 +273,7 @@ class ConnectNowBanner extends StatelessWidget {
     );
   }
 }
+
 class MeditationBanner extends StatelessWidget {
   const MeditationBanner({super.key});
 
@@ -478,3 +489,26 @@ class ResponsiveGridView extends StatelessWidget {
     );
   }
 }
+
+class VolumeEquiliser extends StatelessWidget {
+  const VolumeEquiliser({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 400.h,
+      child: CustomEqualizer(
+
+        isEqEnabled: true,
+        // playerSessionId:
+        // audioPlayer.androidAudioSessionId!,
+        bandTextColor: Colors.green,
+        sliderBoxHeight: 220,
+        sliderBoxPadding: 10,
+        sliderBoxBorderRadius: BorderRadius.circular(20), playerSessionId: 0,
+
+      ),
+    );
+  }
+}
+

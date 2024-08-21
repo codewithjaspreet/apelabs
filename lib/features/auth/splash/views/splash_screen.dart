@@ -1,4 +1,5 @@
 import 'package:apelabs/features/auth/onboarding/views/onboarding_screen.dart';
+import 'package:apelabs/features/auth/singnup/views/singup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +11,9 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), () {
       Get.to(
-          OnboardingScreen()); // Use Get.offNamed to navigate without the option to return to SplashScreen
+          OnboardingScreen()
+      ,transition: Transition.zoom
+      ); // Use Get.offNamed to navigate without the option to return to SplashScreen
     });
     return Scaffold(
       body: Center(

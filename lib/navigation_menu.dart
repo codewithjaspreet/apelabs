@@ -112,5 +112,5 @@ class NavigationController extends GetxController {
     selectedIndex.value = index;
   }
 
-  final screens = [Home(), CommunityScreen(), MusicScreen(), StreamingScreen()];
+  final screens = [Home(),  CommunityScreen(), MusicScreen(), StreamingScreen()];
 }

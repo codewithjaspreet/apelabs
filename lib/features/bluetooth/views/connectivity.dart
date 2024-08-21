@@ -7,8 +7,26 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
-class BluetoothConnectivity extends StatelessWidget {
+class BluetoothConnectivity extends StatefulWidget {
   BluetoothConnectivity({super.key});
+
+  @override
+  State<BluetoothConnectivity> createState() => _BluetoothConnectivityState();
+}
+
+class _BluetoothConnectivityState extends State<BluetoothConnectivity> {
+
+  @override
+  void initState() {
+    super.initState();
+    // Listen to scan results stream and print device names
+    controller.scanResults.listen((results) {
+      print('Total Devices ${results.length}');
+      for (var result in results) {
+        print('Device Name: ${result.device.name}');
+      }
+    });
+  }
   final BluetoothController controller = Get.put(BluetoothController());
 
   @override
@@ -73,47 +91,51 @@ class BluetoothConnectivity extends StatelessWidget {
               ),
             ),
           ),
-          // const SearchingDevice(),
+          const SearchingDevice(),
 
-          GetBuilder<BluetoothController>(
-            init: BluetoothController(),
-            builder: (BluetoothController controller) {
-              return Column(
-                children: [
-                  StreamBuilder<List<ScanResult>>(
-                    stream: controller.scanResults,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const SearchingDevice();
-                      }
-
-                      else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                        return ListView.builder(
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, index) {
-                            final data = snapshot.data![index];
-                            print(data);
-                            return Card(
-                              elevation: 2,
-                              child: ListTile(
-                                title: Text(data.device.name),
-                                subtitle: Text(data.device.id.id),
-                                trailing: Text(data.rssi.toString()),
-                                onTap: () =>
-                                    controller.connectToDevice(data.device),
-                              ),
-                            );
-                          },
-                        );
-                      } else {
-                        return const Center(child: Text("No Device Found"));
-                      }
-                    },
-                  ),
-                ],
-              );
-            },
-          ),
+          // GetBuilder<BluetoothController>(
+          //   init: BluetoothController(),
+          //   builder: (BluetoothController controller) {
+          //     return Column(
+          //       children: [
+          //         StreamBuilder<List<ScanResult>>(
+          //           stream: controller.scanResults,
+          //           builder: (context, snapshot) {
+          //             print(snapshot);
+          //             print('Entered here');
+          //             if (snapshot.connectionState == ConnectionState.waiting) {
+          //               return const SearchingDevice();
+          //             }
+          //
+          //             else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+          //               return ListView.builder(
+          //                 itemCount: snapshot.data!.length,
+          //                 itemBuilder: (context, index) {
+          //
+          //                   print(snapshot.data);
+          //                   final data = snapshot.data![index];
+          //                   print(data);
+          //                   return Card(
+          //                     elevation: 2,
+          //                     child: ListTile(
+          //                       title: Text(data.device.name),
+          //                       subtitle: Text(data.device.id.id),
+          //                       trailing: Text(data.rssi.toString()),
+          //                       onTap: () =>
+          //                           controller.connectToDevice(data.device),
+          //                     ),
+          //                   );
+          //                 },
+          //               );
+          //             } else {
+          //               return const Center(child: Text("No Device Found"));
+          //             }
+          //           },
+          //         ),
+          //       ],
+          //     );
+          //   },
+          // ),
         ],
       ),
     );
@@ -204,8 +226,8 @@ class SearchingDevice extends StatelessWidget {
           //       return ClayContainer(
           //         color: controller.baseColor,
           //         height: 240,
-
           //         width: 240,
+
           //         borderRadius: 200,
           //         curveType: CurveType.concave,
           //         spread: 30,
