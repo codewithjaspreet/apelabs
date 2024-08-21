@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, a) {
         return  GetMaterialApp(
-          home: BluetoothConnectivity(),
+          home: NavigationMenu(),
           debugShowCheckedModeBanner: false,
         );
       },

@@ -13,7 +13,6 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
-
   intl_phone_field: any
   flutter_floating_bottom_bar: ^1.2.0
   shared_preferences: ^2.3.2
@@ -25,6 +24,7 @@ dependencies:
   google_fonts: ^6.2.1
   permission_handler: ^11.3.1
   simple_ripple_animation: ^0.0.9
+  equalizer_flutter: ^0.0.1
 
 dev_dependencies:
   flutter_test:

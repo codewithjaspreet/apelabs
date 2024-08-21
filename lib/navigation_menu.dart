@@ -1,6 +1,10 @@
-import 'package:apelabs/utils/constants/colors.dart';
+import 'package:apelabs/features/community/views/community_screen.dart';
+import 'package:apelabs/features/music/views/music_screen.dart';
+import 'package:apelabs/features/stream/views/streaming_screen.dart';
 import 'package:apelabs/utils/helpers/helper_functions.dart';
+import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'features/home/views/home.dart';
@@ -12,51 +16,54 @@ class NavigationMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = THelperFunctions.isDarkMode(context);
     final NavigationController navigationController =
-    Get.put(NavigationController());
+        Get.put(NavigationController());
 
     return Scaffold(
       bottomNavigationBar: Obx(
-            () => BottomNavigationBar(
-          items: [
-            _buildNavigationBarItem(
-              context,
-              'assets/images/home.png',
-              'Home',
-              0,
-              navigationController.selectedIndex.value,
-              isDark,
-            ),
-            _buildNavigationBarItem(
-              context,
-              'assets/images/community.png',
-              'Community',
-              1,
-              navigationController.selectedIndex.value,
-              isDark,
-            ),
-            _buildNavigationBarItem(
-              context,
-              'assets/images/music.png',
-              'Music',
-              2,
-              navigationController.selectedIndex.value,
-              isDark,
-            ),
-            _buildNavigationBarItem(
-              context,
-              'assets/images/stream.png',
-              'Stream',
-              3,
-              navigationController.selectedIndex.value,
-              isDark,
-            ),
-          ],
-          backgroundColor: isDark ? Colors.black : Colors.white,
-          selectedItemColor: isDark ? Colors.white : Colors.blue,
-          unselectedItemColor: isDark ? Colors.grey : Colors.grey,
-          showSelectedLabels: true, // Show label for selected item
-          showUnselectedLabels: true, // Show label for unselected items
-          onTap: navigationController.updateIndex,
+        () => ClayContainer(
+          spread: 1,
+          child: BottomNavigationBar(
+            items: [
+              _buildNavigationBarItem(
+                context,
+                'assets/images/home.png',
+                'Home',
+                0,
+                navigationController.selectedIndex.value,
+                isDark,
+              ),
+              _buildNavigationBarItem(
+                context,
+                'assets/images/community.png',
+                'Community',
+                1,
+                navigationController.selectedIndex.value,
+                isDark,
+              ),
+              _buildNavigationBarItem(
+                context,
+                'assets/images/music.png',
+                'Music',
+                2,
+                navigationController.selectedIndex.value,
+                isDark,
+              ),
+              _buildNavigationBarItem(
+                context,
+                'assets/images/stream.png',
+                'Stream',
+                3,
+                navigationController.selectedIndex.value,
+                isDark,
+              ),
+            ],
+            backgroundColor: isDark ? Colors.black : Colors.white,
+            selectedItemColor: isDark ? Colors.white : Colors.blue,
+            unselectedItemColor: isDark ? Colors.grey : Colors.grey,
+            showSelectedLabels: true, // Show label for selected item
+            showUnselectedLabels: true, // Show label for unselected items
+            onTap: navigationController.updateIndex,
+          ),
         ),
       ),
       body: Obx(() => navigationController
@@ -65,13 +72,13 @@ class NavigationMenu extends StatelessWidget {
   }
 
   BottomNavigationBarItem _buildNavigationBarItem(
-      BuildContext context,
-      String assetPath,
-      String label,
-      int index,
-      int selectedIndex,
-      bool isDark,
-      ) {
+    BuildContext context,
+    String assetPath,
+    String label,
+    int index,
+    int selectedIndex,
+    bool isDark,
+  ) {
     return BottomNavigationBarItem(
       icon: _buildIcon(assetPath, index == selectedIndex, isDark),
       label: label,
@@ -88,8 +95,10 @@ class NavigationMenu extends StatelessWidget {
       ),
       child: Center(
         child: Image.asset(
+          width: 24.w,
+          height: 24.h,
           assetPath,
-          color: isSelected ? Colors.white : Colors.grey,
+          color: isSelected ? Colors.white : Color(0XFF919191),
         ),
       ),
     );
@@ -103,10 +112,5 @@ class NavigationController extends GetxController {
     selectedIndex.value = index;
   }
 
-  final screens = [
-    Home(),
-    Home(),
-    Home(),
-    Home()
-  ];
+  final screens = [Home(), CommunityScreen(), MusicScreen(), StreamingScreen()];
 }
