@@ -14,24 +14,24 @@ dependencies:
 
   cupertino_icons: ^1.0.8
 
-  get: any
-  flutter_screenutil: any
-  clay_containers: any
-  google_fonts: any
-  go_router: any
   intl_phone_field: any
+  flutter_floating_bottom_bar: ^1.2.0
+  shared_preferences: ^2.3.2
+  clay_containers: ^0.3.4 # for Neuromorphism design
+  go_router: # for routing
+  flutter_screenutil: ^5.9.3
+  flutter_blue: ^0.8.0
+  get: ^4.6.6
+  google_fonts: ^6.2.1
+  permission_handler: ^11.3.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^4.0.0
-  shared_preferences: ^2.3.2
-  clay_containers: ^0.3.4 # for Neuromorphism design
-  go_router: # for routing
-  flutter_screenutil: ^5.9.3
-  flutter_blue_plus: ^1.32.12
-  get: ^4.6.6
-  google_fonts: ^6.2.1
+
+
 flutter:
   uses-material-design: true
 

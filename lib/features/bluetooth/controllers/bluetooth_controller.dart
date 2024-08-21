@@ -1,45 +1,48 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
+import 'package:flutter_blue/flutter_blue.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-class ClayController extends GetxController with SingleGetTickerProviderMixin {
+class BluetoothController extends GetxController {
   Color baseColor = Colors.indigo;
   RxDouble firstDepth = 50.0.obs;
   RxDouble secondDepth = 50.0.obs;
   RxDouble thirdDepth = 50.0.obs;
   RxDouble fourthDepth = 50.0.obs;
   late AnimationController animationController;
+
   @override
   void onInit() {
-    animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 5),
-    )..addListener(() {
-        update(); // Trigger GetX update
-      });
+    scanDevices();
 
-    animationController.forward();
     super.onInit();
   }
 
-  @override
-  void onClose() {
-    animationController.dispose();
-    super.onClose();
+  FlutterBlue ble = FlutterBlue.instance;
+
+// This Function will help users to scan near by BLE devices and get the list of Bluetooth devices.
+  Future scanDevices() async {
+    if (await Permission.bluetoothScan.request().isGranted) {
+      if (await Permission.bluetoothConnect.request().isGranted) {
+        ble.startScan(timeout: Duration(seconds: 15));
+        ble.stopScan();
+      }
+    }
   }
 
-  double? stagger(double value, double progress, double delay) {
-    progress = progress - (1 - delay);
-    if (progress < 0) progress = 0;
-    return value * (progress / delay);
+// This function will help user to connect to BLE devices.
+  Future<void> connectToDevice(BluetoothDevice device) async {
+    await device.connect(timeout: Duration(seconds: 15));
+    device.state.listen((isConnected) {
+      if (isConnected == BluetoothDeviceState.connecting) {
+        print("Device connecting to: ${device.name}");
+      } else if (isConnected == BluetoothDeviceState.connected) {
+        print("Device connected: ${device.name}");
+      } else {
+        print("Device Disconnected");
+      }
+    });
   }
 
-  double get calculatedFirstDepth =>
-      stagger(firstDepth.value, animationController.value, 0.25)!;
-  double get calculatedSecondDepth =>
-      stagger(secondDepth.value, animationController.value, 0.5)!;
-  double get calculatedThirdDepth =>
-      stagger(thirdDepth.value, animationController.value, 0.75)!;
-  double get calculatedFourthDepth =>
-      stagger(fourthDepth.value, animationController.value, 1)!;
+  Stream<List<ScanResult>> get scanResults => ble.scanResults;
 }

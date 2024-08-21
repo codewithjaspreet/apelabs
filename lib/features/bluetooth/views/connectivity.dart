@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 
 class BluetoothConnectivity extends StatelessWidget {
   BluetoothConnectivity({super.key});
-  final ClayController controller = Get.put(ClayController());
+  final BluetoothController controller = Get.put(BluetoothController());
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +73,47 @@ class BluetoothConnectivity extends StatelessWidget {
               ),
             ),
           ),
-          const SearchingDevice()
+          // const SearchingDevice(),
+
+          GetBuilder<BluetoothController>(
+            init: BluetoothController(),
+            builder: (BluetoothController controller) {
+              return Column(
+                children: [
+                  StreamBuilder<List<ScanResult>>(
+                    stream: controller.scanResults,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const SearchingDevice();
+                      }
+
+                      else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                        return ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (context, index) {
+                            final data = snapshot.data![index];
+                            print(data);
+                            return Card(
+                              elevation: 2,
+                              child: ListTile(
+                                title: Text(data.device.name),
+                                subtitle: Text(data.device.id.id),
+                                trailing: Text(data.rssi.toString()),
+                                onTap: () =>
+                                    controller.connectToDevice(data.device),
+                              ),
+                            );
+                          },
+                        );
+                      } else {
+                        return const Center(child: Text("No Device Found"));
+                      }
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
         ],
       ),
     );
