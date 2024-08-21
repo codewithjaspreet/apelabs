@@ -24,7 +24,7 @@ class BluetoothController extends GetxController {
   Future scanDevices() async {
     if (await Permission.bluetoothScan.request().isGranted) {
       if (await Permission.bluetoothConnect.request().isGranted) {
-        ble.startScan(timeout: Duration(seconds: 15));
+        ble.startScan(timeout: const Duration(seconds: 15));
         ble.stopScan();
       }
     }
@@ -32,7 +32,7 @@ class BluetoothController extends GetxController {
 
 // This function will help user to connect to BLE devices.
   Future<void> connectToDevice(BluetoothDevice device) async {
-    await device.connect(timeout: Duration(seconds: 15));
+    await device.connect(timeout: const Duration(seconds: 15));
     device.state.listen((isConnected) {
       if (isConnected == BluetoothDeviceState.connecting) {
         print("Device connecting to: ${device.name}");
