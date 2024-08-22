@@ -490,6 +490,10 @@ class ResponsiveGridView extends StatelessWidget {
   }
 }
 
+
+
+// CODE FOR ADDING VOL EQUALIZER WIDGET --
+
 // class VolumeEquiliser extends StatelessWidget {
 //    VolumeEquiliser({super.key});
 //
@@ -512,4 +516,4 @@ class ResponsiveGridView extends StatelessWidget {
 //       ),    );
 //   }
 // }
-
+//

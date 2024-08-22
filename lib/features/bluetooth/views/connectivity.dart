@@ -93,6 +93,10 @@ class _BluetoothConnectivityState extends State<BluetoothConnectivity> {
           ),
           const SearchingDevice(),
 
+
+          // THIS IS THE CODE FOR -- THE FETCHED STATE OF BLUETOOTH DEVICE
+          // Currently it shows no devices , need to check what the issue is , list is coming empty
+
           // GetBuilder<BluetoothController>(
           //   init: BluetoothController(),
           //   builder: (BluetoothController controller) {
@@ -136,6 +140,8 @@ class _BluetoothConnectivityState extends State<BluetoothConnectivity> {
           //     );
           //   },
           // ),
+
+
         ],
       ),
     );
@@ -218,51 +224,3 @@ class SearchingDevice extends StatelessWidget {
 
 
 
-
-   // Container(
-          //   // color: controller.baseColor,
-          //   child: Center(
-          //     child: Obx(() {
-          //       return ClayContainer(
-          //         color: controller.baseColor,
-          //         height: 240,
-          //         width: 240,
-
-          //         borderRadius: 200,
-          //         curveType: CurveType.concave,
-          //         spread: 30,
-          //         depth: controller.firstDepth.value.toInt(),
-          //         child: Center(
-          //           child: ClayContainer(
-          //             height: 200,
-          //             width: 200,
-          //             borderRadius: 200,
-          //             depth: controller.secondDepth.value.toInt(),
-          //             curveType: CurveType.convex,
-          //             color: controller.baseColor,
-          //             child: Center(
-          //               child: ClayContainer(
-          //                 height: 160,
-          //                 width: 160,
-          //                 borderRadius: 200,
-          //                 color: controller.baseColor,
-          //                 depth: controller.thirdDepth.value.toInt(),
-          //                 curveType: CurveType.concave,
-          //                 child: Center(
-          //                   child: ClayContainer(
-          //                     height: 120,
-          //                     width: 120,
-          //                     borderRadius: 200,
-          //                     color: controller.baseColor,
-          //                     depth: controller.fourthDepth.value.toInt(),
-          //                     curveType: CurveType.convex,
-          //                   ),
-          //                 ),
-          //               ),
-          //             ),
-          //           ),
-          //         ),
-          //       );
-          //     }),
-          //   ),
-          // ),

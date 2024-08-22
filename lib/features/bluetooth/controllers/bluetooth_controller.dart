@@ -4,12 +4,6 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class BluetoothController extends GetxController {
-  Color baseColor = Colors.indigo;
-  RxDouble firstDepth = 50.0.obs;
-  RxDouble secondDepth = 50.0.obs;
-  RxDouble thirdDepth = 50.0.obs;
-  RxDouble fourthDepth = 50.0.obs;
-  late AnimationController animationController;
 
   @override
   void onInit() {
