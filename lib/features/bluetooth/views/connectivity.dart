@@ -1,4 +1,5 @@
 import 'package:apelabs/features/bluetooth/controllers/bluetooth_controller.dart';
+import 'package:apelabs/features/home/views/home.dart';
 import 'package:apelabs/utils/constants/sizes.dart';
 import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:flutter/material.dart';
@@ -195,21 +196,26 @@ class SearchingDevice extends StatelessWidget {
           SizedBox(
             height: TSizes.defaultSpace + 50.h,
           ),
-          ClayContainer(
-            color: const Color(0XFF829AED),
-            width: 157.w,
-            height: 42.h,
-            spread: 1,
-            borderRadius: 7.sp,
-            child: Center(
-              child: Text(
-                textAlign: TextAlign.center,
-                'Cancel',
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20.sp,
-                    color: Colors.white,
+          GestureDetector(
+            onTap:  (){
+              Get.to(Home());
+            },
+            child: ClayContainer(
+              color: const Color(0XFF829AED),
+              width: 157.w,
+              height: 42.h,
+              spread: 1,
+              borderRadius: 7.sp,
+              child: Center(
+                child: Text(
+                  textAlign: TextAlign.center,
+                  'Cancel',
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20.sp,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
