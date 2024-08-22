@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
             ),
           ],
           child: GetMaterialApp(
-            home: SignupScreen(),
+            home: Home(),
             debugShowCheckedModeBanner: false,
           ),
         );
