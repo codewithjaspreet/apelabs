@@ -29,7 +29,7 @@ class Home extends StatelessWidget {
                 userName: 'Rachna',
               ),
               Padding(
-                padding: EdgeInsets.only(top: TSizes.defaultSpace * 3),
+                padding: const EdgeInsets.only(top: TSizes.defaultSpace * 3),
                 child: RippleAnimation(
                   color: const Color(0XFF4771AB),
                   delay: const Duration(milliseconds: 2000),
@@ -77,7 +77,7 @@ class Home extends StatelessWidget {
                   },
                 ],
               ),
-              VolumeEquiliser()
+              // VolumeEquiliser()
             ],
           ),
         ),
@@ -490,25 +490,26 @@ class ResponsiveGridView extends StatelessWidget {
   }
 }
 
-class VolumeEquiliser extends StatelessWidget {
-  const VolumeEquiliser({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 400.h,
-      child: CustomEqualizer(
-
-        isEqEnabled: true,
-        // playerSessionId:
-        // audioPlayer.androidAudioSessionId!,
-        bandTextColor: Colors.green,
-        sliderBoxHeight: 220,
-        sliderBoxPadding: 10,
-        sliderBoxBorderRadius: BorderRadius.circular(20), playerSessionId: 0,
-
-      ),
-    );
-  }
-}
+// class VolumeEquiliser extends StatelessWidget {
+//    VolumeEquiliser({super.key});
+//
+//   Homecontroller controller = Get.find<Homecontroller>();
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: 400.h,
+//       child:  CustomEqualizer(
+//         isEqEnabled: controller.isEqEnabled.value,
+//         playerSessionId: controller.playerSessionId.value,
+//
+//         bandTextColor: Colors.green,
+//         sliderBoxHeight: 220,
+//         sliderBoxPadding: 10,
+//         appbarElevation: 0,
+//         appBarShadowColor: Colors.grey,
+//         titleTextStyle: const TextStyle(color: Colors.red),
+//         sliderBoxBorderRadius: BorderRadius.circular(20),
+//       ),    );
+//   }
+// }
 

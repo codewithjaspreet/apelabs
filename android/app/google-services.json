@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1087153818274",
+    "project_id": "apelabs-1ab76",
+    "storage_bucket": "apelabs-1ab76.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087153818274:android:3d8e59fb026eb83e4e65fb",
+        "android_client_info": {
+          "package_name": "com.example.apelabs"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaxERseqE4RJMLcr5Gv3-d4FyPfDW_qbk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087153818274:android:f1ce6f3ccc9e6b734e65fb",
+        "android_client_info": {
+          "package_name": "com.yourdomain.yourappname"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaxERseqE4RJMLcr5Gv3-d4FyPfDW_qbk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
