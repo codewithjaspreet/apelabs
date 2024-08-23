@@ -23,6 +23,8 @@ dependencies:
   get: ^4.6.6
   google_fonts: ^6.2.1
   permission_handler: ^11.3.1
+  flutter_blue_plus: ^1.32.12
+
   simple_ripple_animation: ^0.0.9
   equalizer_flutter: ^0.0.1
   firebase_auth: ^5.0.0

@@ -1,12 +1,20 @@
+import 'dart:convert';
+
 import 'package:apelabs/features/home/controllers/homecontroller.dart';
 import 'package:apelabs/utils/constants/sizes.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:equalizer_flutter_custom/equalizer_flutter_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+// import 'package:flutter_blue/flutter_blue.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_ripple_animation/simple_ripple_animation.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+import '../../../bluetooth_screen.dart';
+
 
 class Home extends StatelessWidget {
   Home({super.key});
@@ -145,13 +153,213 @@ class TopBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(35.h / 2),
           ),
           child: Center(
-            child: Image.asset('assets/images/blue_2.png'),
+            child: GestureDetector(
+              onTap: () async{
+                // showDialog(
+                //   context: context,
+                //   builder: (context) => BluetoothDevicesScreen(),
+                // );
+                // Get.to(
+                //     BluetoothDevicesScreen()
+                //     // ,transition: Transition.zoom
+                // );
+                // onPressed: () async {
+                  await _requestPermissions(context);
+                // },
+              },
+              child: Image.asset('assets/images/blue_2.png'),
+            ),
           ),
         ),
       ],
     );
   }
 }
+
+
+Future<void> _requestPermissions(BuildContext context) async {
+  final bluetoothStatus = await Permission.bluetooth.request();
+  final bluetoothScanStatus = await Permission.bluetoothScan.request();
+  final bluetoothConnectStatus = await Permission.bluetoothConnect.request();
+  final locationStatus = await Permission.location.request();
+
+  print('Bluetooth permission status: $bluetoothStatus');
+  print('Bluetooth Scan permission status: $bluetoothScanStatus');
+  print('Bluetooth Connect permission status: $bluetoothConnectStatus');
+  print('Location permission status: $locationStatus');
+
+  if (bluetoothStatus.isGranted &&
+      bluetoothScanStatus.isGranted &&
+      bluetoothConnectStatus.isGranted &&
+      locationStatus.isGranted) {
+    Get.to(() => BluetoothDevicesPage());
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Bluetooth and Location permissions are required')),
+    );
+  }
+
+  checkPermissions();
+}
+
+void checkPermissions() async {
+  final bluetoothStatus = await Permission.bluetooth.status;
+  final bluetoothScanStatus = await Permission.bluetoothScan.status;
+  final bluetoothConnectStatus = await Permission.bluetoothConnect.status;
+  final locationStatus = await Permission.location.status;
+
+  print('Bluetooth permission status: $bluetoothStatus');
+  print('Bluetooth Scan permission status: $bluetoothScanStatus');
+  print('Bluetooth Connect permission status: $bluetoothConnectStatus');
+  print('Location permission status: $locationStatus');
+}
+
+
+
+
+
+
+class BluetoothDevicesScreen extends StatefulWidget {
+  @override
+  _BluetoothDevicesScreenState createState() => _BluetoothDevicesScreenState();
+}
+
+class _BluetoothDevicesScreenState extends State<BluetoothDevicesScreen> {
+  static const platform = MethodChannel('com.example.apelabs/bluetooth');
+
+  List<BluetoothDeviceModel> _pairedDevices = [];
+  List<BluetoothDeviceModel> _connectedDevices = [];
+  List<BluetoothDeviceModel> _availableDevices = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _checkPermissionsAndFetchDevices();
+  }
+
+  Future<void> _checkPermissionsAndFetchDevices() async {
+    if (await _requestPermissions()) {
+      _fetchBluetoothDevices();
+    } else {
+      print('Bluetooth permissions denied');
+    }
+  }
+
+  Future<bool> _requestPermissions() async {
+    if (await Permission.bluetooth.isGranted &&
+        await Permission.bluetoothScan.isGranted &&
+        await Permission.bluetoothConnect.isGranted &&
+        await Permission.bluetoothAdvertise.isGranted) {
+      return true;
+    } else {
+      final statuses = await [
+        Permission.bluetooth,
+        Permission.bluetoothScan,
+        Permission.bluetoothConnect,
+        Permission.bluetoothAdvertise,
+      ].request();
+
+      return statuses.values.every((status) => status.isGranted);
+    }
+  }
+
+  Future<void> _fetchBluetoothDevices() async {
+    try {
+      final String pairedDevicesJson = await platform.invokeMethod('getPairedDevices');
+      final String connectedDevicesJson = await platform.invokeMethod('getConnectedDevices');
+      final String availableDevicesJson = await platform.invokeMethod('getAvailableDevices');
+
+      setState(() {
+        _pairedDevices = _parseDeviceJson(pairedDevicesJson);
+        _connectedDevices = _parseDeviceJson(connectedDevicesJson);
+        _availableDevices = _parseDeviceJson(availableDevicesJson);
+      });
+    } on PlatformException catch (e) {
+      print("Failed to get Bluetooth devices: '${e.message}'.");
+    }
+  }
+
+  List<BluetoothDeviceModel> _parseDeviceJson(String jsonStr) {
+    final List<dynamic> deviceList = json.decode(jsonStr);
+    return deviceList
+        .map((deviceJson) => BluetoothDeviceModel.fromJson(deviceJson))
+        .toList();
+  }
+
+  void _refreshDevices() {
+    _fetchBluetoothDevices();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Bluetooth Devices'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: _refreshDevices,
+          ),
+        ],
+      ),
+      body: ListView(
+        children: [
+          _buildDeviceSection('Connected Devices', _connectedDevices),
+          _buildDeviceSection('Paired Devices', _pairedDevices),
+          _buildDeviceSection('Available Devices', _availableDevices),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDeviceSection(String title, List<BluetoothDeviceModel> devices) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        ),
+        ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: devices.length,
+          itemBuilder: (context, index) {
+            final device = devices[index];
+            return ListTile(
+              title: Text(device.name),
+              subtitle: Text(device.id),
+            );
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class BluetoothDeviceModel {
+  final String id;
+  final String name;
+
+  BluetoothDeviceModel({required this.id, required this.name});
+
+  factory BluetoothDeviceModel.fromJson(Map<String, dynamic> json) {
+    return BluetoothDeviceModel(
+      id: json['id'],
+      name: json['name'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+    };
+  }
+}
+
+
+
 
 class DeviceInfo extends StatelessWidget {
   const DeviceInfo({super.key, required this.deviceName});
@@ -200,6 +408,7 @@ class DeviceInfo extends StatelessWidget {
     );
   }
 }
+
 
 class ConnectNowBanner extends StatelessWidget {
   const ConnectNowBanner({super.key});
