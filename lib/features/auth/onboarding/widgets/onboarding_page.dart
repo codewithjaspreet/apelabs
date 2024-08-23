@@ -85,7 +85,7 @@ class OnBoardingPage extends StatelessWidget {
           ),
           GestureDetector(
             onTap: (){
-              controller.forward();
+              controller.forward(context);
             },
             child: ClayContainer(
               color: const Color(0xffE3E6EC),

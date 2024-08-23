@@ -5,6 +5,9 @@ import 'package:get/get.dart';
 // import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'bluetooth_controller.dart';
+import 'features/auth/singnup/views/phonenumber_screen.dart';
+import 'features/auth/singnup/views/singup_screen.dart';
+import 'features/home/views/home.dart';
 
 class BluetoothDevicesPage extends StatelessWidget {
   final BluetoothController bluetoothController =
@@ -14,6 +17,7 @@ class BluetoothDevicesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 60,
         title: Text(
           'Music app',
           style: GoogleFonts.lato(
@@ -24,6 +28,39 @@ class BluetoothDevicesPage extends StatelessWidget {
             ),
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: GestureDetector(
+              onTap: () async {
+                // Get.offAll(() => SignupScreen());
+                Get.offAll(() => Home());
+              },
+              child: ClayContainer(
+                color: const Color(0XFFE3EDF7),
+                height: 55,
+                spread: 2,
+                emboss: true,
+                // emboss: true,
+                width: 55,
+                borderRadius: 50,
+                child: Center(
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    'Skip',
+                    style: GoogleFonts.lato(
+                      textStyle: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16.sp,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
         automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
@@ -48,29 +85,34 @@ class BluetoothDevicesPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10,),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     ...bluetoothController.connectedDevices.map((device) {
-                  return
-                    ClayContainer(
-                      color: const Color(0xFFE3EDF7),
-                      depth: 2,
-                      spread: 0,
-                      borderRadius: 8,
-                      child: ListTile(
-                        leading: const Icon(Icons.headphones, color: Colors.black),
-                        title: Text(
-                          device.name.isNotEmpty ? device.name : "Unknown Device",
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14.sp,
-                              color: Colors.black,
+                      return ClayContainer(
+                        color: const Color(0xFFE3EDF7),
+                        depth: 2,
+                        spread: 0,
+                        borderRadius: 8,
+                        child: ListTile(
+                          leading:
+                              const Icon(Icons.headphones, color: Colors.black),
+                          title: Text(
+                            device.name.isNotEmpty
+                                ? device.name
+                                : "Unknown Device",
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.sp,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
+                          trailing: const Icon(Icons.bluetooth_connected,
+                              color: Colors.blue),
                         ),
-                        trailing: const Icon(Icons.bluetooth_connected, color: Colors.blue),
-                      ),
-                    );
+                      );
                     }).toList(),
                   ],
                 );
@@ -93,20 +135,24 @@ class BluetoothDevicesPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10,),
-
+                    const SizedBox(
+                      height: 10,
+                    ),
                     ...bluetoothController.pairedDevices.map((device) {
                       return ListTile(
-                        leading: const Icon(Icons.headphones, color: Colors.black),
-                        title: Text(device.name.isNotEmpty
-                            ? device.name
-                            : "Unknown Device",style: GoogleFonts.lato(
-                        textStyle: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.sp,
-                          color: Colors.black,
-                        ),
-                      )),
+                        leading:
+                            const Icon(Icons.headphones, color: Colors.black),
+                        title: Text(
+                            device.name.isNotEmpty
+                                ? device.name
+                                : "Unknown Device",
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.sp,
+                                color: Colors.black,
+                              ),
+                            )),
                         // subtitle: Text(device.id.toString()),
                         trailing: ElevatedButton(
                           onPressed: () =>
@@ -135,21 +181,25 @@ class BluetoothDevicesPage extends StatelessWidget {
                             color: const Color(0XFF919191),
                           ),
                         )),
-                    const SizedBox(height: 10,),
-
+                    const SizedBox(
+                      height: 10,
+                    ),
                     ...bluetoothController.availableDevices.map((result) {
                       final device = result.device;
                       return ListTile(
-                          leading: const Icon(Icons.headphones, color: Colors.black),
-                          title: Text(device.name.isNotEmpty
-                              ? device.name
-                              : "Unknown Device",style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14.sp,
-                              color: Colors.black,
-                            ),
-                          )),
+                          leading:
+                              const Icon(Icons.headphones, color: Colors.black),
+                          title: Text(
+                              device.name.isNotEmpty
+                                  ? device.name
+                                  : "Unknown Device",
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14.sp,
+                                  color: Colors.black,
+                                ),
+                              )),
                           // subtitle: Text(device.id.toString()),
                           trailing: TextButton(
                               onPressed: () {
